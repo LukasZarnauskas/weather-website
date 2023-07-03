@@ -1,11 +1,7 @@
 import "./App.css";
 
 function App() {
-  return (
-    <div>
-      <h1>ddd</h1>
-    </div>
-  );
+  return <div className="bg-slate-500"></div>;
 }
 
 export default App;
