@@ -1,10 +1,11 @@
 function Header() {
   return (
-    <div>
-      <h1>
-        <img src="/" alt="icon" />
-        WeatherMe
-      </h1>
+    <div className="text-white">
+      <div>
+        <img className="" src="/src/images/Vector.png" alt="icon" />
+        <h1 className=" text-7xl">WeatherMe</h1>
+        <p className="text-xl">21:00pm</p>
+      </div>
     </div>
   );
 }
