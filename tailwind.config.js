@@ -7,6 +7,7 @@ export default {
     },
     extend: {
       width: {
+        600: "600px",
         1440: "1440px",
       },
     },
