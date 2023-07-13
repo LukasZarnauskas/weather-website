@@ -1,9 +1,14 @@
 import { useState } from "react";
-function Search() {
+function Search({ handleSearchTemp, handleSearchCity }) {
   const [enabled, setEnabled] = useState(false);
   const [input, setInput] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleSearchCity(input);
+  };
+  const handleToggle = () => {
+    setEnabled(!enabled);
+    handleSearchTemp(enabled);
   };
 
   return (
@@ -22,9 +27,7 @@ function Search() {
             readOnly
           />
           <div
-            onClick={() => {
-              setEnabled(!enabled);
-            }}
+            onClick={handleToggle}
             className="w-11 h-6 bg-blue-400 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-400"
           ></div>
         </label>
