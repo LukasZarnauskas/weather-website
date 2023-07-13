@@ -1,15 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { id } from "../../id";
 function Search({ handleSearchTemp, handleSearchCity }) {
   const [enabled, setEnabled] = useState(false);
   const [input, setInput] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSearchCity(input);
+    getCordinates();
   };
   const handleToggle = () => {
     setEnabled(!enabled);
     handleSearchTemp(enabled);
   };
+
+  function getCordinates() {
+    return fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
+    )
+      .then((res) => res.json())
+      .then((dataInJs) => {
+        getWeatherData(dataInJs[0].lat, dataInJs[0].lon);
+      })
+      .catch((err) => console.log(err));
+  }
+  function getWeatherData(lat, lon) {
+    return fetch(
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${id}`
+    )
+      .then((res) => res.json())
+      .then((dataInJs) => {
+        console.log(dataInJs);
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className="">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./assets/App.css";
 import Header from "./components/Header";
 import Search from "./components/Search";
+import WeatherMain from "./components/WeatherMain";
 
 function App() {
   const [searchInfoTemp, setSearchInfoTemp] = useState({ tempValue: true });
@@ -20,6 +21,7 @@ function App() {
         handleSearchTemp={handleSearchTemp}
         handleSearchCity={handleSearchCity}
       />
+      <WeatherMain temp={searchInfoTemp} city={searchInfoCity} />
     </div>
   );
 }
