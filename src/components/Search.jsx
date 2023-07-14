@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { id } from "../../id";
-function Search({ handleSearchTemp, handleSearchCity }) {
+
+function Search({ handleSearchTemp, handleSearchCity, handleWeatherInfo }) {
   const [enabled, setEnabled] = useState(false);
   const [input, setInput] = useState("");
+  const [currentLoc, setCurrentLoc] = useState({ lat: null, lon: null });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSearchCity(input);
     getCordinates();
   };
   const handleToggle = () => {
@@ -23,16 +25,43 @@ function Search({ handleSearchTemp, handleSearchCity }) {
       })
       .catch((err) => console.log(err));
   }
+  async function getCityName(lat, lon) {
+    try {
+      const response = await fetch(
+        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${id}`
+      );
+      const dataInJs = await response.json();
+
+      console.log(dataInJs[0].name);
+      handleSearchCity(dataInJs[0].name);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   function getWeatherData(lat, lon) {
     return fetch(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${id}`
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${id}`
     )
       .then((res) => res.json())
       .then((dataInJs) => {
-        console.log(dataInJs);
+        handleWeatherInfo(dataInJs);
+        getCityName(dataInJs.lat, dataInJs.lon);
       })
       .catch((err) => console.log(err));
   }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+
+      setCurrentLoc({ lat: latitude.toFixed(2), lon: longitude.toFixed(2) });
+      getCityName(latitude.toFixed(2), longitude.toFixed(2));
+    });
+  }, []);
+  useEffect(() => {
+    getWeatherData(currentLoc.lat, currentLoc.lon);
+  }, [currentLoc]);
 
   return (
     <div className="">
