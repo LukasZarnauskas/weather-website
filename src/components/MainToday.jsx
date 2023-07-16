@@ -7,13 +7,13 @@ function MainToday({ info, sunSet, sunRise, city, temp }) {
       <div className=" px-7 rounded-lg text-white w-814 bg-gradient-to-r via-purple-500 from-purple-600 to-black">
         <h3 className="flex text-2xl font-light mt-8 mb-16 ">
           {city.city}
-          <img src="/src/images/icon _location_.png" alt="location" />
+          <img src="/images/icon _location_.png" alt="location" />
         </h3>
         <div className="flex justify-center">
           <h2 className="flex text-7xl items-center justify-center">
             <img
               className="h-16"
-              src="/src/images/icon _temperature_.png"
+              src="/images/icon _temperature_.png"
               alt="termometer"
             />
             {temp
@@ -21,10 +21,10 @@ function MainToday({ info, sunSet, sunRise, city, temp }) {
               : fahrenheit.toFixed()}{" "}
             {degree}
           </h2>
-          <div className="ml-2 flex flex-col ">
+          <div className="ml-2 flex flex-col items-center">
             <img
-              className=""
-              src={`http://openweathermap.org/img/w/${info?.current?.weather[0]?.icon}.png
+              className="max-w-62"
+              src={`https://openweathermap.org/img/w/${info?.current?.weather[0]?.icon}.png
 `}
               alt="icon"
             />

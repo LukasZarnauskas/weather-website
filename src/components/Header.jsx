@@ -36,7 +36,7 @@ function Header({ handleActive }) {
         <div className="flex">
           <img
             className="order-1  w-16 h-12"
-            src="/src/images/Vector.png"
+            src="/images/Vector.png"
             alt="icon"
           />
           <h1 className=" order-2 mt-5 text-7xl">WeatherMe</h1>

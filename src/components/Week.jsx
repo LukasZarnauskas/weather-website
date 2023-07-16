@@ -12,7 +12,7 @@ function Week({ info, temp }) {
         Date: {month}/{day}
       </h3>
       <img
-        src={`http://openweathermap.org/img/w/${info?.weather[0]?.icon}.png`}
+        src={`https://openweathermap.org/img/w/${info?.weather[0]?.icon}.png`}
         alt="icon"
       />
       <p>{info?.weather[0]?.description}</p>

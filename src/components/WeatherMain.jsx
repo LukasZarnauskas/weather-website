@@ -45,6 +45,7 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
 
       {active.week ? (
         <section className="flex flex-col items-center my-12">
+          <h2 className="text-white text-4xl mb-2">{city.city}</h2>
           {info?.daily?.slice(1, 8).map((daily) => (
             <Week key={daily.dt} info={daily} temp={temp} />
           ))}

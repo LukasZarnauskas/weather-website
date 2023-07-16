@@ -22,7 +22,7 @@ function Search({
   };
   function getSuggestions() {
     return fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
     )
       .then((res) => res.json())
       .then((dataInJs) => {
@@ -34,10 +34,9 @@ function Search({
     getSuggestions();
   }, [input]);
 
-  console.log(suggestions);
   function getCordinates() {
     return fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
     )
       .then((res) => res.json())
       .then((dataInJs) => {
@@ -49,7 +48,7 @@ function Search({
   async function getCityName(lat, lon) {
     try {
       const response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${id}`
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${id}`
       );
       const dataInJs = await response.json();
 
@@ -131,7 +130,7 @@ function Search({
           className=" bg-gray-300 py-2 px-3 rounded-s-3xl border-e border-gray-400 hover:bg-gray-400 transition-all"
           type="submit"
         >
-          <img src="/src/images/icon _search_.png" alt="search" />
+          <img src="/images/icon _search_.png" alt="search" />
         </button>
         <input
           placeholder="Search location..."

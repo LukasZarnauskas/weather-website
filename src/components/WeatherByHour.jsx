@@ -17,7 +17,7 @@ function WeatherByHour({ info, active, temp }) {
       <h3 className="font-light">{hours}:00</h3>
       <img
         className=""
-        src={`http://openweathermap.org/img/w/${info?.weather[0]?.icon}.png
+        src={`https://openweathermap.org/img/w/${info?.weather[0]?.icon}.png
 `}
         alt="icon"
       />
