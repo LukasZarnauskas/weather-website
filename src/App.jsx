@@ -8,6 +8,7 @@ function App() {
   const [searchInfoTemp, setSearchInfoTemp] = useState({ tempValue: true });
   const [searchInfoCity, setSearchInfoCity] = useState({ city: "" });
   const [weatherInfo, setWeatherInfo] = useState({});
+  const [weatherInfoByHour, setWeatherInfoByHour] = useState({});
   const [active, setActive] = useState({});
 
   function handleActive(active) {
@@ -22,6 +23,9 @@ function App() {
   function handleWeatherInfo(weather) {
     setWeatherInfo(weather);
   }
+  function handleWeatherInfoByHour(weatherByHour) {
+    setWeatherInfoByHour(weatherByHour);
+  }
 
   return (
     <div className="bg-gray-950 w-1440 font-popins px-6">
@@ -31,11 +35,13 @@ function App() {
         handleSearchTemp={handleSearchTemp}
         handleSearchCity={handleSearchCity}
         handleWeatherInfo={handleWeatherInfo}
+        handleWeatherInfoByHour={handleWeatherInfoByHour}
       />
       <WeatherMain
         temp={searchInfoTemp}
         city={searchInfoCity}
         info={weatherInfo}
+        infoByHour={weatherInfoByHour}
         active={active}
       />
     </div>

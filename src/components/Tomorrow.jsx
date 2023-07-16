@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 
 function Tomorrow({ info, city }) {
-  console.log(info);
-
   const [sunRise, setSunRise] = useState("");
   const [sunSet, setSunSet] = useState("");
-  console.log(info);
+
   useEffect(() => {
     function timeConverter(timestamp, setTo) {
       const date = new Date(timestamp * 1000);

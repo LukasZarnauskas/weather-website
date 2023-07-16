@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { id } from "../../id";
 
-function Search({ handleSearchTemp, handleSearchCity, handleWeatherInfo }) {
+function Search({
+  handleSearchTemp,
+  handleSearchCity,
+  handleWeatherInfo,
+  handleWeatherInfoByHour,
+}) {
   const [enabled, setEnabled] = useState(false);
   const [input, setInput] = useState("");
   const [currentLoc, setCurrentLoc] = useState({ lat: null, lon: null });
@@ -23,6 +28,7 @@ function Search({ handleSearchTemp, handleSearchCity, handleWeatherInfo }) {
       .then((res) => res.json())
       .then((dataInJs) => {
         getWeatherData(dataInJs[0].lat, dataInJs[0].lon);
+        getWeatherDataByHour(dataInJs[0].lat, dataInJs[0].lon);
       })
       .catch((err) => console.log(err));
   }
@@ -51,6 +57,16 @@ function Search({ handleSearchTemp, handleSearchCity, handleWeatherInfo }) {
       .catch((err) => console.log(err));
   }
 
+  function getWeatherDataByHour(lat, lon) {
+    return fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${id}`
+    )
+      .then((res) => res.json())
+      .then((dataInJs) => {
+        handleWeatherInfoByHour(dataInJs);
+      })
+      .catch((err) => console.log(err));
+  }
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
@@ -61,6 +77,7 @@ function Search({ handleSearchTemp, handleSearchCity, handleWeatherInfo }) {
   }, []);
   useEffect(() => {
     getWeatherData(currentLoc.lat, currentLoc.lon);
+    getWeatherDataByHour(currentLoc.lat, currentLoc.lon);
   }, [currentLoc]);
 
   return (

@@ -1,11 +1,17 @@
-function WeatherByHour({ info }) {
+function WeatherByHour({ info, active }) {
   const timeStamp = info?.dt;
   const date = new Date(timeStamp * 1000);
 
   const hours = String(date.getHours()).padStart(2, "0");
-
+  console.log(active);
   return (
-    <div className="rounded-lg w-20 flex flex-col items-center bg-gradient-to-b via-purple-500 from-purple-600 to-black">
+    <div
+      className={`rounded-lg w-20 flex flex-col items-center bg-gradient-to-b ${
+        active
+          ? "via-purple-500 from-purple-600"
+          : "via-green-400 from-green-600"
+      }  to-black`}
+    >
       <h3 className="font-light">{hours}:00</h3>
       <img
         className=""
@@ -13,7 +19,9 @@ function WeatherByHour({ info }) {
 `}
         alt="icon"
       />
-      <h4 className="font-light">{info?.temp.toFixed()}°</h4>
+      <h4 className="font-light">
+        {info?.temp?.toFixed() || info?.main?.temp?.toFixed() || "N/A"}°
+      </h4>
     </div>
   );
 }
