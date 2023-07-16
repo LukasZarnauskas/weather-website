@@ -33,9 +33,7 @@ function Search({
   useEffect(() => {
     getSuggestions();
   }, [input]);
-  const handleChange = (e) => {
-    setInput(e.target.value);
-  };
+
   console.log(suggestions);
   function getCordinates() {
     return fetch(
@@ -147,13 +145,13 @@ function Search({
           suggestions.length !== 0 &&
           suggestions.map((suggestion) => (
             <li
-              onClick={() => setInput(suggestion.name)}
-              className=" bg-gray-300 w-600 text-center text-white text-xl border-b border-gray-400 hover:bg-gray-400 transition-all"
+              onClick={() => {
+                setInput(suggestion.name);
+              }}
+              className="bg-gray-300 w-600 text-center text-white text-xl border-b border-gray-400 hover:bg-gray-400 transition-all"
               key={suggestion.lat}
             >
-              {suggestion.name}
-              {", "}
-              {suggestion.country}
+              {suggestion.name}, {suggestion.country}, {suggestion.state}
             </li>
           ))}
       </ul>
