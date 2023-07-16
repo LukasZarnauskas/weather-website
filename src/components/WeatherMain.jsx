@@ -3,11 +3,12 @@ import WeatherByHour from "./WeatherByHour";
 import MainToday from "./MainToday";
 
 import Tomorrow from "./Tomorrow";
+import Week from "./Week";
 
 function WeatherMain({ temp, city, info, active, infoByHour }) {
   const [sunRise, setSunRise] = useState("");
   const [sunSet, setSunSet] = useState("");
-  console.log(infoByHour?.list?.slice(3, 10));
+
   useEffect(() => {
     function timeConverter(timestamp, setTo) {
       const date = new Date(timestamp * 1000);
@@ -22,7 +23,7 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
     timeConverter(info?.current?.sunrise, setSunRise);
     timeConverter(info?.current?.sunset, setSunSet);
   }, [info?.current?.sunrise, info?.current?.sunset]);
-  console.log(active);
+
   return (
     <div>
       {active.today ? (
@@ -35,7 +36,13 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
         />
       ) : null}
 
-      {active.week ? () : null}
+      {active.week ? (
+        <section className="flex flex-col items-center my-12">
+          {info?.daily?.slice(1, 8).map((daily) => (
+            <Week key={daily.dt} info={daily} />
+          ))}
+        </section>
+      ) : null}
 
       <section className=" flex justify-between text-white mt-10">
         {active.today

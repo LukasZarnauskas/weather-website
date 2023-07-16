@@ -33,8 +33,8 @@ function Tomorrow({ info, city }) {
               src="/src/images/icon _temperature_.png"
               alt="termometer"
             />
-            {info?.temp?.min?.toFixed() ?? "N/A"}-
-            {info?.temp?.max?.toFixed() ?? "N/A"}°C
+            {info?.temp?.night?.toFixed() ?? "N/A"}-
+            {info?.temp?.day?.toFixed() ?? "N/A"}°C
           </h2>
           <div className="ml-2 flex flex-col ">
             <img
