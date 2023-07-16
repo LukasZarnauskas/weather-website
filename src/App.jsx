@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="bg-gray-800">
-      <div className="bg-gray-950 w-1440 font-popins px-6 mx-auto">
+      <div className="bg-gray-950 w-1440 font-popins px-6 mx-auto py-3">
         <Header handleActive={handleActive} />
 
         <Search
