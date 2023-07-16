@@ -4,7 +4,7 @@ import MainToday from "./MainToday";
 
 import Tomorrow from "./Tomorrow";
 
-function WeatherMain({ temp, city, info }) {
+function WeatherMain({ temp, city, info, active }) {
   const [sunRise, setSunRise] = useState("");
   const [sunSet, setSunSet] = useState("");
   console.log(info);
@@ -26,7 +26,11 @@ function WeatherMain({ temp, city, info }) {
   return (
     <div>
       <MainToday info={info} sunSet={sunSet} sunRise={sunRise} city={city} />
-      <Tomorrow info={info.daily[1]} city={city} />
+      <Tomorrow
+        info={info?.daily && info?.daily.length > 1 ? info.daily[1] : null}
+        city={city}
+      />
+
       <section className=" flex justify-between text-white mt-10">
         {info?.hourly?.slice(1, 13).map((hour) => (
           <WeatherByHour key={hour.dt} info={hour} />

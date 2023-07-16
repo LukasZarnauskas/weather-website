@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Header() {
+function Header({ handleActive }) {
   const [active, setActive] = useState({
     today: true,
     tomorrow: false,
@@ -29,7 +29,7 @@ function Header() {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-
+  handleActive(active);
   return (
     <div className="text-white  flex  items-center">
       <div className="flex flex-col">

@@ -8,6 +8,11 @@ function App() {
   const [searchInfoTemp, setSearchInfoTemp] = useState({ tempValue: true });
   const [searchInfoCity, setSearchInfoCity] = useState({ city: "" });
   const [weatherInfo, setWeatherInfo] = useState({});
+  const [active, setActive] = useState({});
+
+  function handleActive(active) {
+    setActive(active);
+  }
   function handleSearchTemp(tempVal) {
     setSearchInfoTemp({ tempValue: tempVal });
   }
@@ -20,7 +25,8 @@ function App() {
 
   return (
     <div className="bg-gray-950 w-1440 font-popins px-6">
-      <Header timeOf={weatherInfo.timezone} />
+      <Header handleActive={handleActive} />
+
       <Search
         handleSearchTemp={handleSearchTemp}
         handleSearchCity={handleSearchCity}
@@ -30,6 +36,7 @@ function App() {
         temp={searchInfoTemp}
         city={searchInfoCity}
         info={weatherInfo}
+        active={active}
       />
     </div>
   );
