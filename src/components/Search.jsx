@@ -9,6 +9,7 @@ function Search({ handleSearchTemp, handleSearchCity, handleWeatherInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     getCordinates();
+    setInput("");
   };
   const handleToggle = () => {
     setEnabled(!enabled);
@@ -32,7 +33,6 @@ function Search({ handleSearchTemp, handleSearchCity, handleWeatherInfo }) {
       );
       const dataInJs = await response.json();
 
-      console.log(dataInJs[0].name);
       handleSearchCity(dataInJs[0].name);
     } catch (err) {
       console.log(err);

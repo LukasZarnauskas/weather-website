@@ -19,7 +19,7 @@ function App() {
   }
 
   return (
-    <div className="bg-gray-950 w-1440 font-popins">
+    <div className="bg-gray-950 w-1440 font-popins px-6">
       <Header timeOf={weatherInfo.timezone} />
       <Search
         handleSearchTemp={handleSearchTemp}
