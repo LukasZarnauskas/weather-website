@@ -26,24 +26,26 @@ function App() {
   function handleWeatherInfoByHour(weatherByHour) {
     setWeatherInfoByHour(weatherByHour);
   }
-  console.log(searchInfoTemp);
-  return (
-    <div className="bg-gray-950 w-1440 font-popins px-6">
-      <Header handleActive={handleActive} />
 
-      <Search
-        handleSearchTemp={handleSearchTemp}
-        handleSearchCity={handleSearchCity}
-        handleWeatherInfo={handleWeatherInfo}
-        handleWeatherInfoByHour={handleWeatherInfoByHour}
-      />
-      <WeatherMain
-        temp={searchInfoTemp}
-        city={searchInfoCity}
-        info={weatherInfo}
-        infoByHour={weatherInfoByHour}
-        active={active}
-      />
+  return (
+    <div className="bg-gray-800">
+      <div className="bg-gray-950 w-1440 font-popins px-6 mx-auto">
+        <Header handleActive={handleActive} />
+
+        <Search
+          handleSearchTemp={handleSearchTemp}
+          handleSearchCity={handleSearchCity}
+          handleWeatherInfo={handleWeatherInfo}
+          handleWeatherInfoByHour={handleWeatherInfoByHour}
+        />
+        <WeatherMain
+          temp={searchInfoTemp}
+          city={searchInfoCity}
+          info={weatherInfo}
+          infoByHour={weatherInfoByHour}
+          active={active}
+        />
+      </div>
     </div>
   );
 }

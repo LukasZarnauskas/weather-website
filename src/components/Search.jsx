@@ -10,7 +10,7 @@ function Search({
   const [enabled, setEnabled] = useState(false);
   const [input, setInput] = useState("");
   const [currentLoc, setCurrentLoc] = useState({ lat: null, lon: null });
-
+  const [suggestions, setSuggestions] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
     getCordinates();
@@ -20,7 +20,23 @@ function Search({
     setEnabled(!enabled);
     handleSearchTemp(enabled);
   };
-
+  function getSuggestions() {
+    return fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
+    )
+      .then((res) => res.json())
+      .then((dataInJs) => {
+        setSuggestions(dataInJs);
+      })
+      .catch((err) => console.log(err));
+  }
+  useEffect(() => {
+    getSuggestions();
+  }, [input]);
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+  console.log(suggestions);
   function getCordinates() {
     return fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
@@ -67,6 +83,7 @@ function Search({
       })
       .catch((err) => console.log(err));
   }
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
@@ -125,6 +142,21 @@ function Search({
           onChange={(e) => setInput(e.target.value)}
         />
       </form>
+      <ul className="flex flex-col  items-center ">
+        {Array.isArray(suggestions) &&
+          suggestions.length !== 0 &&
+          suggestions.map((suggestion) => (
+            <li
+              onClick={() => setInput(suggestion.name)}
+              className=" bg-gray-300 w-600 text-center text-white text-xl border-b border-gray-400 hover:bg-gray-400 transition-all"
+              key={suggestion.lat}
+            >
+              {suggestion.name}
+              {", "}
+              {suggestion.country}
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
