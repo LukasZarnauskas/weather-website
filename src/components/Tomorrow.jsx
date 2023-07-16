@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Tomorrow({ info, city }) {
+function Tomorrow({ info, city, temp }) {
   const [sunRise, setSunRise] = useState("");
   const [sunSet, setSunSet] = useState("");
 
@@ -19,6 +19,10 @@ function Tomorrow({ info, city }) {
     timeConverter(info?.sunset, setSunSet);
   }, [info?.sunrise, info?.sunset]);
 
+  const degree = temp ? "°C" : "°F";
+  const fahrenheitDay = info?.temp?.day * 1.8 + 32;
+  const fahrenheitNight = info?.temp?.night * 1.8 + 32;
+
   return (
     <section className="flex items-center justify-center my-12">
       <div className=" px-7 rounded-lg text-white w-814 bg-gradient-to-r via-green-400 from-green-600 to-black">
@@ -33,8 +37,14 @@ function Tomorrow({ info, city }) {
               src="/src/images/icon _temperature_.png"
               alt="termometer"
             />
-            {info?.temp?.night?.toFixed() ?? "N/A"}-
-            {info?.temp?.day?.toFixed() ?? "N/A"}°C
+            {temp
+              ? info?.temp?.night?.toFixed() || fahrenheitNight.toFixed()
+              : fahrenheitNight.toFixed()}
+            -
+            {temp
+              ? info?.temp?.day?.toFixed() || fahrenheitDay.toFixed()
+              : fahrenheitDay.toFixed()}
+            {degree}
           </h2>
           <div className="ml-2 flex flex-col ">
             <img

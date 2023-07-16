@@ -1,4 +1,7 @@
-function MainToday({ info, sunSet, sunRise, city }) {
+function MainToday({ info, sunSet, sunRise, city, temp }) {
+  const degree = temp ? "°C" : "°F";
+  const fahrenheit = info?.current?.temp * 1.8 + 32;
+
   return (
     <section className="flex items-center justify-center my-12">
       <div className=" px-7 rounded-lg text-white w-814 bg-gradient-to-r via-purple-500 from-purple-600 to-black">
@@ -13,7 +16,10 @@ function MainToday({ info, sunSet, sunRise, city }) {
               src="/src/images/icon _temperature_.png"
               alt="termometer"
             />
-            {info?.current?.temp?.toFixed() ?? "N/A"}°C
+            {temp
+              ? info?.current?.temp?.toFixed() ?? "N/A"
+              : fahrenheit.toFixed()}{" "}
+            {degree}
           </h2>
           <div className="ml-2 flex flex-col ">
             <img

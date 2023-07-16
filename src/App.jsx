@@ -5,7 +5,7 @@ import Search from "./components/Search";
 import WeatherMain from "./components/WeatherMain";
 
 function App() {
-  const [searchInfoTemp, setSearchInfoTemp] = useState({ tempValue: true });
+  const [searchInfoTemp, setSearchInfoTemp] = useState(true);
   const [searchInfoCity, setSearchInfoCity] = useState({ city: "" });
   const [weatherInfo, setWeatherInfo] = useState({});
   const [weatherInfoByHour, setWeatherInfoByHour] = useState({});
@@ -15,7 +15,7 @@ function App() {
     setActive(active);
   }
   function handleSearchTemp(tempVal) {
-    setSearchInfoTemp({ tempValue: tempVal });
+    setSearchInfoTemp(tempVal);
   }
   function handleSearchCity(city) {
     setSearchInfoCity({ city: city });
@@ -26,7 +26,7 @@ function App() {
   function handleWeatherInfoByHour(weatherByHour) {
     setWeatherInfoByHour(weatherByHour);
   }
-
+  console.log(searchInfoTemp);
   return (
     <div className="bg-gray-950 w-1440 font-popins px-6">
       <Header handleActive={handleActive} />

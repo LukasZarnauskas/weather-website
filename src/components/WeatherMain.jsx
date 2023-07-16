@@ -27,19 +27,26 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
   return (
     <div>
       {active.today ? (
-        <MainToday info={info} sunSet={sunSet} sunRise={sunRise} city={city} />
+        <MainToday
+          info={info}
+          sunSet={sunSet}
+          sunRise={sunRise}
+          city={city}
+          temp={temp}
+        />
       ) : null}
       {active.tomorrow ? (
         <Tomorrow
           info={info?.daily && info?.daily.length > 1 ? info.daily[1] : null}
           city={city}
+          temp={temp}
         />
       ) : null}
 
       {active.week ? (
         <section className="flex flex-col items-center my-12">
           {info?.daily?.slice(1, 8).map((daily) => (
-            <Week key={daily.dt} info={daily} />
+            <Week key={daily.dt} info={daily} temp={temp} />
           ))}
         </section>
       ) : null}
@@ -53,13 +60,16 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
                   key={hour.dt}
                   info={hour}
                   active={active.today}
+                  temp={temp}
                 />
               ))
           : null}
         {active.tomorrow
           ? infoByHour?.list
               ?.slice(1, 9)
-              .map((hour) => <WeatherByHour key={hour.dt} info={hour} />)
+              .map((hour) => (
+                <WeatherByHour key={hour.dt} info={hour} temp={temp} />
+              ))
           : null}
       </section>
     </div>

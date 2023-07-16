@@ -1,8 +1,10 @@
-function WeatherByHour({ info, active }) {
+function WeatherByHour({ info, active, temp }) {
   const timeStamp = info?.dt;
   const date = new Date(timeStamp * 1000);
 
   const hours = String(date.getHours()).padStart(2, "0");
+
+  const fahrenheit = (info?.temp || info?.main?.temp) * 1.8 + 32;
 
   return (
     <div
@@ -20,7 +22,10 @@ function WeatherByHour({ info, active }) {
         alt="icon"
       />
       <h4 className="font-light">
-        {info?.temp?.toFixed() || info?.main?.temp?.toFixed() || "N/A"}°
+        {(temp
+          ? info?.temp?.toFixed() || info?.main?.temp?.toFixed()
+          : fahrenheit.toFixed()) || "N/A"}
+        °
       </h4>
     </div>
   );
