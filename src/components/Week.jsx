@@ -7,7 +7,7 @@ function Week({ info, temp }) {
   const fahrenheitDay = info?.temp?.day * 1.8 + 32;
   const fahrenheitNight = info?.temp?.night * 1.8 + 32;
   return (
-    <div className=" p-3 mb-1 rounded-lg flex justify-between items-center text-white w-814 bg-gradient-to-r via-purple-500 from-green-600 to-black">
+    <div className=" p-3 mb-1 rounded-lg flex justify-between items-center text-white w-814 bg-gradient-to-r via-purple-500 from-green-600 to-black max-lg:w-600 ">
       <h3>
         Date: {month}/{day}
       </h3>

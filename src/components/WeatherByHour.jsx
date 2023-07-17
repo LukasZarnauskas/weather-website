@@ -8,7 +8,7 @@ function WeatherByHour({ info, active, temp }) {
 
   return (
     <div
-      className={`rounded-lg w-20 flex flex-col items-center bg-gradient-to-b ${
+      className={`rounded-lg w-20 flex flex-col items-center bg-gradient-to-b  max-lg:w-16 ${
         active
           ? "via-purple-500 from-purple-600"
           : "via-green-400 from-green-600"

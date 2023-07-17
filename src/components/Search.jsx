@@ -96,7 +96,7 @@ function Search({
 
   return (
     <div className="">
-      <div className="flex align-middle">
+      <div className="flex  max-md: mb-4">
         <p
           className={`${enabled ? "text-white" : "text-blue-500"} text-xl mx-2`}
         >
@@ -134,7 +134,7 @@ function Search({
         </button>
         <input
           placeholder="Search location..."
-          className="px-2 bg-gray-300 text-2xl text-gray-600 w-600 rounded-e-3xl outline-none"
+          className="px-2 bg-gray-300 text-2xl text-gray-600 w-600 rounded-e-3xl outline-none max-lg:w-96"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
@@ -147,7 +147,7 @@ function Search({
               onClick={() => {
                 setInput(suggestion.name);
               }}
-              className="bg-gray-300 w-600 text-center text-white text-xl border-b border-gray-400 hover:bg-gray-400 transition-all"
+              className="bg-gray-300 w-600 text-center text-white text-xl border-b border-gray-400 hover:bg-gray-400 transition-all max-lg:w-96"
               key={suggestion.lat}
             >
               {suggestion.name}, {suggestion.country}, {suggestion.state}

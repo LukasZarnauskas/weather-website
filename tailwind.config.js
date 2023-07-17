@@ -6,8 +6,13 @@ export default {
       popins: ["Poppins", "sans-serif"],
     },
     extend: {
+      minWidth: {
+        1024: "1024px",
+      },
       maxWidth: {
         62: "62px",
+        1440: "1440px",
+        814: "814px",
       },
       width: {
         600: "600px",

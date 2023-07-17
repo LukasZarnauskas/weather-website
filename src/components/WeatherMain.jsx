@@ -52,26 +52,28 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
         </section>
       ) : null}
 
-      <section className=" flex justify-between text-white mt-10">
-        {active.today
-          ? info?.hourly
-              ?.slice(1, 13)
-              .map((hour) => (
-                <WeatherByHour
-                  key={hour.dt}
-                  info={hour}
-                  active={active.today}
-                  temp={temp}
-                />
-              ))
-          : null}
-        {active.tomorrow
-          ? infoByHour?.list
-              ?.slice(1, 9)
-              .map((hour) => (
-                <WeatherByHour key={hour.dt} info={hour} temp={temp} />
-              ))
-          : null}
+      <section className="  overflow-x-scroll ">
+        <div className=" flex justify-between text-white mt-10 overflow-x-scroll min-w-1024">
+          {active.today
+            ? info?.hourly
+                ?.slice(1, 13)
+                .map((hour) => (
+                  <WeatherByHour
+                    key={hour.dt}
+                    info={hour}
+                    active={active.today}
+                    temp={temp}
+                  />
+                ))
+            : null}
+          {active.tomorrow
+            ? infoByHour?.list
+                ?.slice(1, 9)
+                .map((hour) => (
+                  <WeatherByHour key={hour.dt} info={hour} temp={temp} />
+                ))
+            : null}
+        </div>
       </section>
     </div>
   );
