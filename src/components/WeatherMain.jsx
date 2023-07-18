@@ -28,8 +28,6 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
   currentDate.setDate(currentDate.getDate() + 1);
   const localDate = currentDate.toLocaleDateString();
 
-  console.log(localDate);
-  console.log(infoByHour);
   return (
     <div>
       {active.today ? (
