@@ -26,14 +26,21 @@ function Tomorrow({ info, city, temp }) {
   return (
     <section className="flex items-center justify-center my-12">
       <div className=" px-7 rounded-lg text-white w-814 bg-gradient-to-r via-green-400 from-green-600 to-black">
-        <h3 className="flex text-2xl font-light mt-8 mb-16 ">
+        {window.innerWidth <= 768 ? (
+          <h3 className="text-xl mt-2 text-center">Tomorrow</h3>
+        ) : null}
+        <h3 className="flex text-2xl font-light mt-8 mb-16 max-md:text-base max-md:justify-center max-md:mt-2 ">
           {city.city}
-          <img src="/images/icon _location_.png" alt="location" />
+          <img
+            className="max-md:h-5"
+            src="/images/icon _location_.png"
+            alt="location"
+          />
         </h3>
-        <div className="flex justify-center">
-          <h2 className="flex text-7xl items-center justify-center">
+        <div className="flex justify-center max-md:flex-col">
+          <h2 className="flex text-7xl items-center justify-center max-md:text-5xl">
             <img
-              className="h-16"
+              className="h-16 max-md:h-10"
               src="/images/icon _temperature_.png"
               alt="termometer"
             />
@@ -58,9 +65,11 @@ function Tomorrow({ info, city, temp }) {
             </p>
           </div>
         </div>
-        <h3>Sunrise: {sunRise}</h3>
-        <h3>Sunset: {sunSet}</h3>
-        <div className="mt-24 flex justify-around text-white">
+        <div className="max-md:flex max-md:justify-around max-md:mt-3">
+          <h3>Sunrise: {sunRise}</h3>
+          <h3>Sunset: {sunSet}</h3>
+        </div>
+        <div className="mt-24 flex justify-around text-white max-md:mt-10 max-md:mb-4">
           <div>
             <h3>HUMIDITY</h3>
             <h3 className="text-center">{`${info?.humidity}%` ?? "N/A"}</h3>

@@ -45,15 +45,17 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
 
       {active.week ? (
         <section className="flex flex-col items-center my-12">
-          <h2 className="text-white text-4xl mb-2">{city.city}</h2>
+          <h2 className="text-white text-4xl mb-2 max-md:text-2xl">
+            {city.city}
+          </h2>
           {info?.daily?.slice(1, 8).map((daily) => (
             <Week key={daily.dt} info={daily} temp={temp} />
           ))}
         </section>
       ) : null}
 
-      <section className="  overflow-x-scroll ">
-        <div className=" flex justify-between text-white mt-10 overflow-x-scroll min-w-1024">
+      <section className="  max-lg:overflow-x-scroll  ">
+        <div className=" flex justify-between text-white mt-10  max-lg:min-w-1024 ">
           {active.today
             ? info?.hourly
                 ?.slice(1, 13)

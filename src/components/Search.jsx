@@ -134,7 +134,7 @@ function Search({
         </button>
         <input
           placeholder="Search location..."
-          className="px-2 bg-gray-300 text-2xl text-gray-600 w-600 rounded-e-3xl outline-none max-lg:w-96"
+          className="px-2 bg-gray-300 text-2xl text-gray-600 w-600 rounded-e-3xl outline-none max-lg:w-96 "
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
