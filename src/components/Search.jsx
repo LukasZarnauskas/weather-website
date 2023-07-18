@@ -21,14 +21,16 @@ function Search({
     handleSearchTemp(enabled);
   };
   function getSuggestions() {
-    return fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
-    )
-      .then((res) => res.json())
-      .then((dataInJs) => {
-        setSuggestions(dataInJs);
-      })
-      .catch((err) => console.log(err));
+    if (input) {
+      return fetch(
+        `https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${id}`
+      )
+        .then((res) => res.json())
+        .then((dataInJs) => {
+          setSuggestions(dataInJs);
+        })
+        .catch((err) => console.log(err));
+    }
   }
   useEffect(() => {
     getSuggestions();
@@ -59,26 +61,30 @@ function Search({
   }
 
   function getWeatherData(lat, lon) {
-    return fetch(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${id}`
-    )
-      .then((res) => res.json())
-      .then((dataInJs) => {
-        handleWeatherInfo(dataInJs);
-        getCityName(dataInJs.lat, dataInJs.lon);
-      })
-      .catch((err) => console.log(err));
+    if (lat && lon) {
+      return fetch(
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${id}`
+      )
+        .then((res) => res.json())
+        .then((dataInJs) => {
+          handleWeatherInfo(dataInJs);
+          getCityName(dataInJs.lat, dataInJs.lon);
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   function getWeatherDataByHour(lat, lon) {
-    return fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${id}`
-    )
-      .then((res) => res.json())
-      .then((dataInJs) => {
-        handleWeatherInfoByHour(dataInJs);
-      })
-      .catch((err) => console.log(err));
+    if (lat && lon) {
+      return fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${id}`
+      )
+        .then((res) => res.json())
+        .then((dataInJs) => {
+          handleWeatherInfoByHour(dataInJs);
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   useEffect(() => {
