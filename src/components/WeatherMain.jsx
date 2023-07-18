@@ -24,6 +24,12 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
     timeConverter(info?.current?.sunset, setSunSet);
   }, [info?.current?.sunrise, info?.current?.sunset]);
 
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
+  const localDate = currentDate.toLocaleDateString();
+
+  console.log(localDate);
+  console.log(infoByHour);
   return (
     <div>
       {active.today ? (
@@ -70,7 +76,7 @@ function WeatherMain({ temp, city, info, active, infoByHour }) {
             : null}
           {active.tomorrow
             ? infoByHour?.list
-                ?.slice(1, 9)
+                ?.filter((hour) => hour.dt_txt.includes(localDate))
                 .map((hour) => (
                   <WeatherByHour key={hour.dt} info={hour} temp={temp} />
                 ))

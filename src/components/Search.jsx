@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { id } from "../../id";
 
 function Search({
@@ -11,15 +11,20 @@ function Search({
   const [input, setInput] = useState("");
   const [currentLoc, setCurrentLoc] = useState({ lat: null, lon: null });
   const [suggestions, setSuggestions] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     getCordinates();
     setInput("");
+    setSuggestions([]);
   };
   const handleToggle = () => {
     setEnabled(!enabled);
     handleSearchTemp(enabled);
   };
+
+  const buttonRef = useRef(null);
+
   function getSuggestions() {
     if (input) {
       return fetch(
@@ -100,6 +105,13 @@ function Search({
     getWeatherDataByHour(currentLoc.lat, currentLoc.lon);
   }, [currentLoc]);
 
+  const handleLiClick = (suggestion) => {
+    setInput(suggestion.name);
+    const buttonElement = buttonRef.current;
+    if (buttonElement) {
+      buttonElement.click();
+    }
+  };
   return (
     <div className="">
       <div className="flex  max-md: mb-4">
@@ -133,14 +145,19 @@ function Search({
         onSubmit={handleSubmit}
       >
         <button
-          className=" bg-gray-300 py-2 px-3 rounded-s-3xl border-e border-gray-400 hover:bg-gray-400 transition-all"
+          ref={buttonRef}
+          className=" bg-gray-300 py-2 px-3 rounded-s-3xl border-e border-gray-400 hover:bg-gray-400 transition-all  "
           type="submit"
         >
-          <img src="/images/icon _search_.png" alt="search" />
+          <img
+            className="max-md:min-w-20 "
+            src="/images/icon _search_.png"
+            alt="search"
+          />
         </button>
         <input
           placeholder="Search location..."
-          className="px-2 bg-gray-300 text-2xl text-gray-600 w-600 rounded-e-3xl outline-none max-lg:w-96 "
+          className="px-2 bg-gray-300 text-2xl text-gray-600 w-600 rounded-e-3xl outline-none max-lg:w-96 max-md:min-w-240 "
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
@@ -150,9 +167,7 @@ function Search({
           suggestions.length !== 0 &&
           suggestions.map((suggestion) => (
             <li
-              onClick={() => {
-                setInput(suggestion.name);
-              }}
+              onClick={() => handleLiClick(suggestion)}
               className="bg-gray-300 w-600 text-center text-white text-xl border-b border-gray-400 hover:bg-gray-400 transition-all max-lg:w-96"
               key={suggestion.lat}
             >

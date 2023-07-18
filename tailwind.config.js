@@ -8,6 +8,8 @@ export default {
     extend: {
       minWidth: {
         1024: "1024px",
+        20: "20px",
+        240: "240px",
       },
       maxWidth: {
         62: "62px",
